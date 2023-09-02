@@ -1,6 +1,7 @@
 # created by virtualenv automatically
 
 env/
+media/
 .idea/
 **/__pycache__/
 *.pyc
