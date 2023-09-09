@@ -12,10 +12,10 @@ class FileSerializer(serializers.ModelSerializer):
         model = File
         fields = ('title' , 'file')
 
-class CategorySerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.HyperlinkedModelSerializer):
     categories = CategorySerializer(many = True)
+    files = FileSerializer(many=True)
+
     class Meta:
         model = Category
-        fields = ('title' , 'description' , 'avatar' , 'categories')
-        
-        
+        fields = ('title' , 'description' , 'avatar' , 'categories' , 'files')

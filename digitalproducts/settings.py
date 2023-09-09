@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'products'
+    'products' ,
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -53,7 +54,9 @@ ROOT_URLCONF = 'digitalproducts.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+             
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

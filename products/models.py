@@ -38,7 +38,7 @@ class Product(models.Model):
         verbose_name_plural =   _('Products')
 
 class File(models.Model):
-    product = models.ForeignKey('Product' ,verbose_name=_('product') , on_delete=models.CASCADE)
+    product = models.ForeignKey('Product' ,verbose_name=_('product') ,related_name='files' ,on_delete=models.CASCADE)
     title = models.CharField(_('title') , max_length=50)
     file  = models.FileField(_('file') ,upload_to=('files/%Y/%m/%d/'))
     is_enable = models.BooleanField(_('is enable') , default=True)
