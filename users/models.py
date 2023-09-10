@@ -2,7 +2,7 @@ import random
 
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core import validators
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser , PermissionsMixin , BaseUserManager , send_mail
@@ -61,7 +61,7 @@ class User(AbstractBaseUser , PermissionsMixin):
     first_name = models.CharField(_('first name') , max_length=30 , blank=True)
     last_name = models.CharField(_('last name') , max_length=30 , blank=True)
 
-    email = models.EmailField(-('email address') , unique=True , null=True , blank=true)
+    email = models.EmailField(_('email address') , unique=True , null=True , blank=True)
     phone_number = models.BigIntegerField(_('mobile number'),unique=True , null=True , blank=True ,
     validators=[
         validators.RegexValidator(r'^989[0-3 , 9]\d{8}$' ,
@@ -81,7 +81,7 @@ class User(AbstractBaseUser , PermissionsMixin):
     )
 
     date_joined = models.DateTimeField(_('date joined') , default=timezone.now)
-    last_seen = models.DateTimeField(_('last seen date') ,null=true)
+    last_seen = models.DateTimeField(_('last seen date') ,null=True)
 
     objects = UserManager()
 
@@ -91,8 +91,8 @@ class User(AbstractBaseUser , PermissionsMixin):
 
     class Meta:
         db_table = 'users'
-        verbase_name = _('user')
-        verbase_name_plural = _('users')
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
 
 
     def get_full_name(self):
@@ -120,13 +120,13 @@ class UserProfile(models.Model):
     nick_name = models.CharField(_('nick_name') , max_length=150 , blank=True)
     avatar = models.ImageField(_('avatar') , blank=True)
     birthday = models.DateField(_('birthday') , null=True , blank=True)
-    gender = models.ForeignKey(verbose_name=_('province') , to='Province' , null=True , on_delete=models.SET_DEFAULT)
+    gender = models.ForeignKey(verbose_name=_('province') , to='Province' , null=True ,default='Man' , on_delete=models.SET_DEFAULT)
 
 
     class Meta:
         db_table = 'user_profiles'
-        verbase_name = _('profile')
-        verbase_name_plural = _('profiles')
+        verbose_name = _('profile')
+        verbose_name_plural = _('profiles')
 
     @property
     def get_first_name(self):
@@ -162,8 +162,8 @@ class Device(models.Model):
 
     class Meta:
         db_table = 'user_devices'
-        verbase_name = _('device')
-        verbase_name_plural = _('devices')
+        verbose_name = _('device')
+        verbose_name_plural = _('devices')
         unique_together= ('user' , 'device_uuid')
          
 class Province(models.Model):
