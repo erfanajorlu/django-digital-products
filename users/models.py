@@ -140,3 +140,29 @@ class UserProfile(models.Model):
         return self.nick_name if self.nick_name else self.user.username
 
 
+class Device(models.Model):
+    WEB = 1
+    IOS = 2
+    ANDROID = 3
+    DEVICE_TYPE_CHOICES = (
+        (WEB, "Web"),
+        (IOS,"Ios"),
+        (ANDROID , 'android')
+    )
+
+    user = models.ForeignKey(User , related_name='devices' , on_delete=models.CASCADE)
+    device_uuid = models.UUIDField(_('Device UUID') , null=True)
+
+    last_login = models.DateTimeField(_('last login date') , null=True)
+    device_type = models.PositiveSmallIntegerField(choices=DEVICE_TYPE_CHOICES , default=ANDROID)
+    device_os = models.CharField(_('device os') , max_length=20 , blank=True)
+    device_model = models.CharField(_('device model') , max_length=50 , blank=True)
+    app_version = models.CharField(_('app version') , max_length=20 , blank=True)
+    created_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'user_devices'
+        verbase_name = _('device')
+        verbase_name_plural = _('devices')
+        unique_together= ('user' , 'device_uuid')
+         
