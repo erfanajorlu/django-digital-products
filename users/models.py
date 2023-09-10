@@ -166,3 +166,11 @@ class Device(models.Model):
         verbase_name_plural = _('devices')
         unique_together= ('user' , 'device_uuid')
          
+class Province(models.Model):
+    name = models.CharField(max_length=50)
+    is_valid = models.BooleanField(default=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
