@@ -2,12 +2,12 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
-from utils.validators import valiate_skw
+from utils.validators import validate_sku
 
 class Package(models.Model):
     title = models.CharField(_('title') , max_length=50)
-    sku = models.CharField(_('stock keeping only'),max_length=20 , validators=[valiate_skw] ,db_index=True)
-    description = models.TextChoices(_('description') , blank=True)
+    sku = models.CharField(_('stock keeping only'),max_length=20 , validators=[validate_sku] ,db_index=True)
+    description = models.TextField(_('description') , blank =True)
     avatar = models.ImageField(_('avatar') , blank=True , upload_to='packages/')
     is_enable = models.BooleanField(_('is_enable') , default=True)
     price = models.PositiveIntegerField(_('price'))
