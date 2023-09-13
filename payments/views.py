@@ -11,7 +11,8 @@ from rest_framework.permissions import IsAuthenticated , IsAuthenticatedOrReadOn
 
 # Create your views here.
 from .models import Gateway , Payment
-from ..subscriptions.models import Package , Subscription
+from subscriptions.models import Package, Subscription
+
 
 from .serializers import GatewaySerializer
 
